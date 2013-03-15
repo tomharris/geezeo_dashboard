@@ -1,0 +1,8 @@
+<%= form_for :session, url: sessions_path, html: { class: 'form-signin' } do |f| -%>
+  <h2 class="form-signin-heading">API Credentials</h2>
+  
+  <%= f.text_field :user_id, class: 'input-block-level', placeholder: 'User ID' %>
+  <%= f.text_field :token, class: 'input-block-level', placeholder: 'Token' %>
+
+  <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+<% end -%>
