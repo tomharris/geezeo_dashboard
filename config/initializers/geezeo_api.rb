@@ -1,0 +1,1 @@
+GeezeoDashboard::Application.config.geezeo_api_base_uri = 'https://sales.geezeo.com/api/v1'
