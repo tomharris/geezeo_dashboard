@@ -4,10 +4,14 @@ class SessionsController < ApplicationController
   end
 
   def create
-    session[:user_id] = params[:session][:user_id]
-    session[:token] = params[:session][:token]
+    if User.new(params[:session][:user_id], params[:session][:token]).valid?
+      session[:user_id] = params[:session][:user_id]
+      session[:token] = params[:session][:token]
 
-    redirect_to new_sessions_path
+      redirect_to new_sessions_path
+    else
+      redirect_to new_sessions_path
+    end
   end
 
   def destroy

@@ -16,10 +16,20 @@ describe SessionsController do
       post :create, session: { user_id: '1', token: 'some_token' }
     end
 
-    it "should create the session by saving the user_id and token in the session" do
+    it "should create the session by saving the user_id and token in the session if the credentials are valid" do
+      User.any_instance.stub(:valid?).and_return(true)
+
       do_post
       session[:user_id].should == '1'
       session[:token].should == 'some_token'
+    end
+
+    it "should not save the user_id and token in the session if the credentials are invalid" do
+      User.any_instance.stub(:valid?).and_return(false)
+
+      do_post
+      session[:user_id].should be_nil
+      session[:token].should be_nil
     end
 
     it "should redirect to the dashboard" do
