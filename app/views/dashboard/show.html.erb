@@ -4,7 +4,7 @@
       <li class="nav-header">Accounts</li>
 
       <%- @accounts.each do |account| -%>
-      <li>
+      <li class="<%= 'active' if account.id == @selected_account.id %>">
         <%= link_to dashboard_path('account_id' => account.id), remote: true do %>
           <%= account.name %>: <%= number_to_currency(account.balance) %>
         <%- end -%>

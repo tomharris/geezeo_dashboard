@@ -4,7 +4,7 @@ describe "dashboard/show" do
 
   before(:each) do
     accounts = assign(:accounts, [valid_account, valid_account])
-    assign(:selected_account, accounts.first)
+    @selected_account = assign(:selected_account, accounts.first)
     assign(:page, 1)
 
     transaction_collection = [valid_transaction, valid_transaction, valid_transaction]
@@ -22,6 +22,11 @@ describe "dashboard/show" do
     it "renders an account list item for each account" do
       render
       response.should have_selector('ul.nav-list li:not(.nav-header)', count: 2)
+    end
+
+    it "should add the 'active' class to the selected account" do
+      render
+      response.should have_selector("ul.nav-list li.active a[href='#{dashboard_path('account_id' => @selected_account.id)}']")
     end
   end
 
