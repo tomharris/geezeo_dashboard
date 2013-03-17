@@ -17,23 +17,12 @@ describe Account do
 
   describe "::from_hash" do
 
-    before(:each) do
-      @attributes = {
-        'id'                => 123,
-        'name'              => 'my account',
-        'balance'           => 10.01,
-        'reference_id'      => '12',
-        'aggregation_type'  => 'partner',
-        'state'             => 'active'
-      }
-    end
-
     it "should turn the attributes into an instance" do
-      Account.from_hash(@attributes).should be_instance_of(Account)
+      Account.from_hash(valid_account_attributes).should be_instance_of(Account)
     end
 
     it "should set the fields in the instance to the values in the attributes" do
-      instance = Account.from_hash(@attributes)
+      instance = Account.from_hash(valid_account_attributes)
       instance.id.should                == 123
       instance.name.should              == 'my account'
       instance.balance.should           == 10.01

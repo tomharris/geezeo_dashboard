@@ -2,16 +2,9 @@ require 'spec_helper'
 
 describe "dashboard/show" do
 
-  def valid_transaction
-    Transaction.new.tap do |t|
-      t.created_at = Time.now
-      t.posted_at = Time.now
-    end
-  end
-
   before(:each) do
-    assign(:accounts, [Account.new, Account.new])
-    assign(:selected_account, Account.new)
+    accounts = assign(:accounts, [valid_account, valid_account])
+    assign(:selected_account, accounts.first)
     assign(:transactions, [valid_transaction, valid_transaction, valid_transaction])
   end
 

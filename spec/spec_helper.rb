@@ -22,8 +22,11 @@ RSpec.configure do |config|
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
 
-  # Include our helper for mocking the api requests
+  # Include our helpers for mocking the api requests
   config.include(GeezeoApi::HttpRequestSupport)
+
+  # Include our helpers for creating test models
+  config.include(GeezeoApi::ModelFactorySupport)
 
   # Run specs in random order to surface order dependencies. If you find an
   # order dependency and want to debug it, you can fix the order by providing
