@@ -1,1 +1,3 @@
+$('.account').removeClass('active');
+$('#<%= @selected_account.id %>').addClass('active');
 $('#transaction-section').replaceWith('<%= escape_javascript(render('transaction_section')) %>');

@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "dashboard/show" do
 
   before(:each) do
-    accounts = assign(:accounts, [valid_account, valid_account])
-    @selected_account = assign(:selected_account, accounts.first)
+    @accounts = assign(:accounts, [valid_account, valid_account])
+    @selected_account = assign(:selected_account, @accounts.first)
     assign(:page, 1)
 
     transaction_collection = [valid_transaction, valid_transaction, valid_transaction]
@@ -21,7 +21,14 @@ describe "dashboard/show" do
 
     it "renders an account list item for each account" do
       render
-      response.should have_selector('ul.nav-list li:not(.nav-header)', count: 2)
+      response.should have_selector('ul.nav-list li.account', count: 2)
+    end
+
+    it "should set the id of the account menu item to the id off the account" do
+      render
+      @accounts.each do |account|
+        response.should have_selector("ul.nav-list li##{account.id}")
+      end
     end
 
     it "should add the 'active' class to the selected account" do
