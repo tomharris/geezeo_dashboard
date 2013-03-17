@@ -12,4 +12,8 @@ class User
   def valid?
     self.class.head(Account.resource_path_pattern.gsub(':user_id', user_id), basic_auth: { username: @token }).success?
   end
+
+  def accounts
+    @accounts ||= Account.find_all_for(self)
+  end
 end

@@ -31,4 +31,23 @@ describe User do
       a_request_of_accounts_for(@user).should have_been_made
     end
   end
+
+  describe "#accounts" do
+
+    it "should have requested this user's accounts" do
+      @user.accounts
+      a_request_of_accounts_for(@user).should have_been_made
+    end
+
+    it "should only request the accounts once when called multiple times" do
+      @user.accounts
+      @user.accounts
+      a_request_of_accounts_for(@user).should have_been_made.once
+    end
+
+    it "should return an array of Accounts" do
+      @user.accounts.should respond_to(:each)
+      @user.accounts.first.should be_kind_of(Account)
+    end
+  end
 end
