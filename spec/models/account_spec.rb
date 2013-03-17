@@ -50,14 +50,18 @@ describe Account do
       @account = Account.new.tap { |a| a.id = '321'; a.user = @user }
     end
 
+    it "should return a proxie to handle pagination" do
+      @account.transactions.should be_kind_of(RemoteAssociationPaginationProxie)
+    end
+
     it "should have requested this account's transactions" do
-      @account.transactions
+      @account.transactions.fetch
       a_request_of_transactions_for(@user, @account).should have_been_made
     end
 
     it "should only request the accounts once when called multiple times" do
-      @account.transactions
-      @account.transactions
+      @account.transactions.fetch
+      @account.transactions.fetch
       a_request_of_transactions_for(@user, @account).should have_been_made.once
     end
 

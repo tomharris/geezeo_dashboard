@@ -39,8 +39,13 @@ describe Transaction do
     end
 
     it "should perform a GET request to the transactions api to fetch the transactions" do
-      Transaction.find_all_for(@user, @account)
+      Transaction.find_all_for(@user, @account).fetch
       a_request_of_transactions_for(@user, @account).should have_been_made
+    end
+    
+    it "should total_pages for the request" do
+      transactions = Transaction.find_all_for(@user, @account).fetch
+      transactions.total_pages.should == 6
     end
   end
 end

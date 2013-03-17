@@ -4,13 +4,16 @@ class Transaction
 
   base_uri GeezeoDashboard::Application.config.geezeo_api_base_uri
 
-  def self.resource_path_pattern; '/users/:user_id/accounts/:account_id/transactions'; end
+  def self.resource_path_pattern; '/users/:user_id/accounts/:account_id/transactions?page=:page'; end
 
   def self.find_all_for(user, account)
-    response = get(resource_path_pattern.gsub(':user_id', user.user_id.to_s).gsub(':account_id', account.id.to_s), basic_auth: { username: user.token })
+    RemoteAssociationPaginationProxie.for_request_with_page do |page, proxy|
+      response = get(resource_path_pattern.gsub(':user_id', user.user_id.to_s).gsub(':account_id', account.id.to_s).gsub(':page', page.to_s), basic_auth: { username: user.token })
+      proxy.total_pages = response.parsed_response['pages']['total_pages'].to_i
 
-    response.parsed_response['transactions'].collect do |attributes|
-      from_hash(attributes['transaction'])
+      response.parsed_response['transactions'].collect do |attributes|
+        from_hash(attributes['transaction'])
+      end
     end
   end
 
