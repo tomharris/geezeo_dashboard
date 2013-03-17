@@ -42,10 +42,26 @@ describe Transaction do
       Transaction.find_all_for(@user, @account).fetch
       a_request_of_transactions_for(@user, @account).should have_been_made
     end
-    
+
     it "should total_pages for the request" do
       transactions = Transaction.find_all_for(@user, @account).fetch
       transactions.total_pages.should == 6
+    end
+  end
+
+  describe "#credit?" do
+
+    it "should indicate when a transaction was a credit" do
+      transaction = Transaction.new.tap { |a| a.transaction_type = 'Credit' }
+      transaction.should be_credit
+    end
+  end
+
+  describe "#debit?" do
+
+    it "should indicate when a transaction was a debit" do
+      transaction = Transaction.new.tap { |a| a.transaction_type = 'Debit' }
+      transaction.should be_debit
     end
   end
 end

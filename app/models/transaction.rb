@@ -30,4 +30,12 @@ class Transaction
       transaction.tags              = attributes['tags']
     end
   end
+
+  def credit?
+    transaction_type == 'Credit'
+  end
+
+  def debit?
+    transaction_type == 'Debit'
+  end
 end
