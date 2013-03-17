@@ -10,6 +10,6 @@ class User
   end
 
   def valid?
-    self.class.head("/users/#{@user_id}/accounts", basic_auth: { username: @token }).success?
+    self.class.head(Account.resource_path_pattern.gsub(':user_id', user_id), basic_auth: { username: @token }).success?
   end
 end

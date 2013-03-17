@@ -39,14 +39,15 @@ describe Account do
   describe "::find_all_for" do
 
     before(:each) do
+      WebMock.reset!
+      stub_geezeo_api_requests
+
       @user = User.new('123', 'some_token')
     end
 
     it "should perform a GET request to the accounts api to fetch the accounts" do
-      response = mock("mock response").as_null_object
-      Account.should_receive(:get).with('/users/123/accounts', hash_including({ basic_auth: { username: 'some_token' } })).and_return(response)
-
       Account.find_all_for(@user)
+      a_request_of_accounts_for(@user).should have_been_made
     end
   end
 end

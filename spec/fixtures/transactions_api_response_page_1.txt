@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+Date: Sun, 17 Mar 2013 14:07:39 GMT
+Status: 200 OK
+Content-Type: application/json; charset=utf-8
+ETag: "894cdbc48a6f7286573b2ef79e43227e"
+Cache-Control: max-age=0, private, must-revalidate, no-cache, no-store
+X-UA-Compatible: IE=Edge,chrome=1
+X-Runtime: 0.160715
+Set-Cookie: _session_id=0e9277b97fbbbc29c482fbd652c03d89; path=/; secure; HttpOnly
+Vary: Accept-Encoding,User-Agent
+P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"
+X-Request-Start: t=1363529258849350
+X-Trace: 1B949953F7D4949B39C748FCCA760643772EB901D047C6E127DDD5240D
+Transfer-Encoding: chunked
+
+{"pages":{"current_page":1,"total_pages":6},"transactions":[{"transaction":{"id":"bd123b4b-7b33-46d9-a77f-5efc525f67c5","reference_id":null,"transaction_type":"Debit","memo":"GameStop","balance":59.99,"posted_at":"2013-03-13T00:00:00+00:00","created_at":"2013-03-13T19:36:53+00:00","nickname":"GameStop","original_name":"GameStop","check_number":null,"tags":[{"tag":{"name":"Entertainment","balance":59.99}}]}},{"transaction":{"id":"cce144f8-1d17-4618-bd59-9cfd897d94a0","reference_id":null,"transaction_type":"Debit","memo":"Check #125","balance":200.0,"posted_at":"2013-03-12T00:00:00+00:00","created_at":"2013-03-13T19:36:54+00:00","nickname":"Check #125","original_name":"Check #125","check_number":null,"tags":[{"tag":{"name":"Personal","balance":200.0}}]}},{"transaction":{"id":"616a4beb-a593-4ec0-a322-7e393c5103e9","reference_id":null,"transaction_type":"Credit","memo":"Company Payroll","balance":2809.85,"posted_at":"2013-03-11T00:00:00+00:00","created_at":"2013-03-13T19:36:55+00:00","nickname":"Company Payroll","original_name":"Company Payroll","check_number":null,"tags":[{"tag":{"name":"Income","balance":2809.85}}]}},{"transaction":{"id":"a95ff0c3-e987-47c8-9d67-d46d73f4084c","reference_id":null,"transaction_type":"Debit","memo":"California Pizza Kitchen","balance":35.45,"posted_at":"2013-03-08T00:00:00+00:00","created_at":"2013-03-13T19:36:55+00:00","nickname":"California Pizza Kitchen","original_name":"California Pizza Kitchen","check_number":null,"tags":[{"tag":{"name":"Diningout","balance":35.45}}]}},{"transaction":{"id":"7ff4bce7-721a-421b-86f0-5b41f27fc0ff","reference_id":null,"transaction_type":"Debit","memo":"Progressive Insurance","balance":160.48,"posted_at":"2013-03-05T00:00:00+00:00","created_at":"2013-03-13T19:36:56+00:00","nickname":"Progressive Insurance","original_name":"Progressive Insurance","check_number":null,"tags":[{"tag":{"name":"Utilities","balance":160.48}}]}},{"transaction":{"id":"15552c97-39d6-450e-a501-95860964eee4","reference_id":null,"transaction_type":"Debit","memo":"Dicks Sporting Goods","balance":45.63,"posted_at":"2013-03-03T00:00:00+00:00","created_at":"2013-03-13T19:36:57+00:00","nickname":"Dicks Sporting Goods","original_name":"Dicks Sporting Goods","check_number":null,"tags":[{"tag":{"name":"Personal","balance":45.63}}]}}]}

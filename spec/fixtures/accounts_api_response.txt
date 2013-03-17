@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+Date: Sun, 17 Mar 2013 14:16:18 GMT
+Status: 200 OK
+Content-Type: application/json; charset=utf-8
+ETag: "00b0816fe392045b8169f7394683884c"
+Cache-Control: max-age=0, private, must-revalidate, no-cache, no-store
+X-UA-Compatible: IE=Edge,chrome=1
+X-Runtime: 0.093190
+Set-Cookie: _session_id=b897f1eb621ef188522737df00aec642; path=/; secure; HttpOnly
+Vary: Accept-Encoding,User-Agent
+P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"
+X-Request-Start: t=1363529778749644
+X-Trace: 1B2DB8A61062054A7FD52F5A034F97126017105F574D1950933D85138A
+Transfer-Encoding: chunked
+
+{"accounts":[{"id":4369562,"name":"eChecking","balance":"300.54","reference_id":"789274930","aggregation_type":"partner","state":"active","harvest_updated_at":null,"account_type":null,"fi":null},{"id":4369563,"name":"Complete Savings","balance":"1000.0","reference_id":"278914032","aggregation_type":"partner","state":"active","harvest_updated_at":null,"account_type":null,"fi":null},{"id":4369564,"name":"Preferred Plus Card","balance":"769.88","reference_id":"10984092","aggregation_type":"partner","state":"active","harvest_updated_at":null,"account_type":null,"fi":null}]}

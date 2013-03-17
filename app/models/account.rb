@@ -4,8 +4,10 @@ class Account
 
   base_uri GeezeoDashboard::Application.config.geezeo_api_base_uri
 
+  def self.resource_path_pattern; '/users/:user_id/accounts'; end
+
   def self.find_all_for(user)
-    get("/users/#{user.user_id}/accounts", basic_auth: { username: user.token }).parsed_response['accounts'].collect do |attributes|
+    get(resource_path_pattern.gsub(':user_id', user.user_id), basic_auth: { username: user.token }).parsed_response['accounts'].collect do |attributes|
       from_hash(attributes)
     end
   end

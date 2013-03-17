@@ -4,9 +4,13 @@ class Transaction
 
   base_uri GeezeoDashboard::Application.config.geezeo_api_base_uri
 
+  def self.resource_path_pattern; '/users/:user_id/accounts/:account_id/transactions'; end
+
   def self.find_all_for(user, account)
-    get("/users/#{user.user_id}/accounts/#{account.id}/transactions", basic_auth: { username: user.token }).parsed_response['transactions'].collect do |attributes|
-      from_hash(attributes)
+    response = get(resource_path_pattern.gsub(':user_id', user.user_id).gsub(':account_id', account.id), basic_auth: { username: user.token })
+
+    response.parsed_response['transactions'].collect do |attributes|
+      from_hash(attributes['transaction'])
     end
   end
 

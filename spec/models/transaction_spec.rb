@@ -45,15 +45,16 @@ describe Transaction do
   describe "::find_all_for" do
 
     before(:each) do
+      WebMock.reset!
+      stub_geezeo_api_requests
+
       @user = User.new('123', 'some_token')
       @account = Account.new.tap { |a| a.id = '321' }
     end
 
     it "should perform a GET request to the transactions api to fetch the transactions" do
-      response = mock("mock response").as_null_object
-      Transaction.should_receive(:get).with('/users/123/accounts/321/transactions', hash_including({ basic_auth: { username: 'some_token' } })).and_return(response)
-
       Transaction.find_all_for(@user, @account)
+      a_request_of_transactions_for(@user, @account).should have_been_made
     end
   end
 end

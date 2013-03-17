@@ -23,4 +23,5 @@ gem 'jquery-rails'
 
 group :test do
   gem 'rspec-rails'
+  gem 'webmock', require: 'webmock/rspec'
 end
