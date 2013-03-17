@@ -10,7 +10,7 @@ module GeezeoApi
         to_return(File.read(Rails.root.join('spec', 'fixtures', 'accounts_api_response.txt')))
 
       # Stub for the transactions call
-      transactions_request_pattern = Regexp.new(api_uri_pattern_for_resource(Transaction.resource_path_pattern).gsub(':token', '.*?').gsub(':user_id', '\d+').gsub(':account_id', '\d+'))
+      transactions_request_pattern = Regexp.new(api_uri_pattern_for_resource(Transaction.resource_path_pattern).gsub(':token', '.*?').gsub(':user_id', '\d+').gsub(':account_id', '\d+').gsub('?page=:page', '\?page=\d+'))
       stub_http_request(:any, transactions_request_pattern).
         to_return(File.read(Rails.root.join('spec', 'fixtures', 'transactions_api_response_page_1.txt')))
     end
@@ -20,7 +20,7 @@ module GeezeoApi
     end
 
     def a_request_of_transactions_for(user, account)
-      a_request(:any, api_uri_pattern_for_resource(Transaction.resource_path_pattern).gsub(':token', user.token).gsub(':user_id', user.user_id).gsub(':account_id', account.id))
+      a_request(:any, api_uri_pattern_for_resource(Transaction.resource_path_pattern).gsub(':token', user.token).gsub(':user_id', user.user_id).gsub(':account_id', account.id).gsub(':page', '1'))
     end
 
     private

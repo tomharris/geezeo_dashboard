@@ -8,7 +8,10 @@ class DashboardController < ApplicationController
       @selected_account = @accounts.select { |account| account.id.to_s == params['account_id'] }.first
     end
 
+    @page = params['page'].to_i
+    @page = 1 if @page < 1
+
     @selected_account ||= @accounts.first
-    @transactions = @selected_account.transactions
+    @transactions = @selected_account.transactions.for_page(@page)
   end
 end

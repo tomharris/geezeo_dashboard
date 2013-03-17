@@ -5,7 +5,11 @@ describe "dashboard/show" do
   before(:each) do
     accounts = assign(:accounts, [valid_account, valid_account])
     assign(:selected_account, accounts.first)
-    assign(:transactions, [valid_transaction, valid_transaction, valid_transaction])
+    assign(:page, 1)
+
+    transaction_collection = [valid_transaction, valid_transaction, valid_transaction]
+    transaction_collection.stub!(:total_pages).and_return(2)
+    assign(:transactions, transaction_collection)
   end
 
   describe "account list" do
@@ -31,6 +35,11 @@ describe "dashboard/show" do
     it "renders a transaction row for each transaction" do
       render
       response.should have_selector('.transaction-row', count: 3)
+    end
+
+    it "should have pagination" do
+      render
+      response.should have_selector('.pagination ul li', count: 4) # 2 pages plus 'next' and 'previous'
     end
   end
 end

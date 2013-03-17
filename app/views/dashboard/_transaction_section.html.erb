@@ -14,4 +14,22 @@
     <div class="span2"><%= l(transaction.posted_at, format: :date_only) %></div>
   </div>
   <%- end -%>
+
+  <div class="row-fluid pagination">
+    <ul>
+      <li class="<%= 'disabled' if @page == 1 %>">
+        <%= link_to 'Previous', dashboard_path('account_id' => @selected_account.id, 'page' => (@page - 1)), remote: true %>
+      </li>
+
+      <%- (1..@transactions.total_pages).each do |i| -%>
+      <li class="<%= 'active' if @page == i %>">
+        <%= link_to i, dashboard_path('account_id' => @selected_account.id, 'page' => i), remote: true %>
+      </li>
+      <%- end -%>
+
+      <li class="<%= 'disabled' if @page == @transactions.total_pages %>">
+        <%= link_to 'Next', dashboard_path('account_id' => @selected_account.id, 'page' => (@page + 1)), remote: true %>
+      </li>
+    </ul>
+  </div>
 </div>
