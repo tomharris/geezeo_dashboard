@@ -5,6 +5,7 @@
     <div class="span2"><b>Name</b></div>
     <div class="span1"><b>Amount</b></div>
     <div class="span2"><b>Posted Date</b></div>
+    <div class="span1"><b>Type</b></div>
   </div>
 
   <%- @transactions.each do |transaction| -%>
@@ -12,6 +13,7 @@
     <div class="span2"><%= transaction.nickname %></div>
     <div class="span1"><%= number_to_currency(transaction.balance) %></div>
     <div class="span2"><%= l(transaction.posted_at, format: :date_only) %></div>
+    <div class="span1"><%= transaction.transaction_type %></div>
   </div>
   <%- end -%>
 
