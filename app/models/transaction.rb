@@ -7,7 +7,7 @@ class Transaction
   def self.resource_path_pattern; '/users/:user_id/accounts/:account_id/transactions'; end
 
   def self.find_all_for(user, account)
-    response = get(resource_path_pattern.gsub(':user_id', user.user_id).gsub(':account_id', account.id), basic_auth: { username: user.token })
+    response = get(resource_path_pattern.gsub(':user_id', user.user_id.to_s).gsub(':account_id', account.id.to_s), basic_auth: { username: user.token })
 
     response.parsed_response['transactions'].collect do |attributes|
       from_hash(attributes['transaction'])

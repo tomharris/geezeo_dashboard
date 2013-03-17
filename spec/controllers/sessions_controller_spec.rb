@@ -33,7 +33,10 @@ describe SessionsController do
     end
 
     it "should redirect to the dashboard" do
-      pending
+      User.any_instance.stub(:valid?).and_return(true)
+
+      do_post
+      response.should redirect_to(dashboard_path)
     end
   end
 
