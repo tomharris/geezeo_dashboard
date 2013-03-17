@@ -24,4 +24,5 @@ gem 'jquery-rails'
 group :test do
   gem 'rspec-rails'
   gem 'webmock', require: 'webmock/rspec'
+  gem 'capybara', require: 'capybara/rspec'
 end

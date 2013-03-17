@@ -1,0 +1,11 @@
+<div class="row-fluid">
+  <div class="span3 well">
+    <ul class="nav nav-list">
+      <li class="nav-header">Accounts</li>
+
+      <%- @accounts.each do |account| -%>
+      <li><%= account.name %>: <%= number_to_currency(account.balance) %></li>
+      <%- end -%>
+    </ul>
+  </div>
+</div>
