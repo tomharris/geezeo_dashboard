@@ -37,11 +37,19 @@ describe DashboardController do
       assigns(:accounts).should_not be_empty
     end
 
-    it "should assign the first group of transactions for the current user's first account to transactions" do
+    it "should assign the current user's first account to selected_account by default" do
+      do_get
+
+      assigns(:selected_account).should_not be_nil
+      assigns(:selected_account).should == assigns(:accounts).first
+    end
+
+    it "should assign the first group of transactions for the selected_account to transactions" do
       do_get
 
       assigns(:transactions).should_not be_nil
       assigns(:transactions).should_not be_empty
+      assigns(:transactions).should == assigns(:selected_account).transactions
     end
   end
 end
