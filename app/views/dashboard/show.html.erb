@@ -4,25 +4,13 @@
       <li class="nav-header">Accounts</li>
 
       <%- @accounts.each do |account| -%>
-      <li><%= account.name %>: <%= number_to_currency(account.balance) %></li>
+      <li>
+        <%= link_to dashboard_path('account_id' => account.id), remote: true do %>
+          <%= account.name %>: <%= number_to_currency(account.balance) %>
+        <%- end -%>
+      </li>
       <%- end -%>
     </ul>
   </div>
-  <div class="span9">
-    <h3>Transaction Details for <%= @selected_account.name %></h3>
-
-    <div class="row-fluid transaction-header">
-      <div class="span2"><b>Name</b></div>
-      <div class="span1"><b>Amount</b></div>
-      <div class="span2"><b>Posted Date</b></div>
-    </div>
-
-    <%- @transactions.each do |transaction| -%>
-    <div class="row-fluid transaction-row">
-      <div class="span2"><%= transaction.nickname %></div>
-      <div class="span1"><%= number_to_currency(transaction.balance) %></div>
-      <div class="span2"><%= l(transaction.posted_at, format: :date_only) %></div>
-    </div>
-    <%- end -%>
-  </div>
+  <%= render 'transaction_section' %>
 </div>

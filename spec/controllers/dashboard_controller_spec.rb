@@ -18,8 +18,8 @@ describe DashboardController do
 
   describe "GET show" do
 
-    def do_get
-      get :show, {}, valid_session
+    def do_get(options = {})
+      get :show, options, valid_session
     end
 
     it "should assign the current user to user" do
@@ -37,7 +37,7 @@ describe DashboardController do
       assigns(:accounts).should_not be_empty
     end
 
-    it "should assign the current user's first account to selected_account by default" do
+    it "should assign the current user's first account to selected_account by default if one isn't specified" do
       do_get
 
       assigns(:selected_account).should_not be_nil
@@ -50,6 +50,13 @@ describe DashboardController do
       assigns(:transactions).should_not be_nil
       assigns(:transactions).should_not be_empty
       assigns(:transactions).should == assigns(:selected_account).transactions
+    end
+
+    it "should assign the account specified by the 'account_id' param" do
+      # '4369563' is the second account in the 'accounts_api_response.txt' fixture
+      do_get('account_id' => '4369563')
+
+      assigns(:selected_account).id.should == 4369563
     end
   end
 end
