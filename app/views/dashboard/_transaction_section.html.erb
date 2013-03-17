@@ -2,7 +2,7 @@
   <h3>Transaction Details for <%= @selected_account.name %></h3>
 
   <div class="row-fluid transaction-header">
-    <div class="span2"><b>Name</b></div>
+    <div class="span2 offset1"><b>Name</b></div>
     <div class="span1"><b>Amount</b></div>
     <div class="span2"><b>Posted Date</b></div>
     <div class="span1"><b>Type</b></div>
@@ -10,6 +10,13 @@
 
   <%- @transactions.each do |transaction| -%>
   <div class="row-fluid transaction-row">
+    <div class="span1">
+      <%- if transaction.credit? -%>
+      <span class="badge badge-success">&uarr;</span>
+      <%- elsif transaction.debit? -%>
+      <span class="badge badge-warning">&darr;</span>
+      <%- end -%>
+    </div>
     <div class="span2"><%= transaction.nickname %></div>
     <div class="span1"><%= number_to_currency(transaction.balance) %></div>
     <div class="span2"><%= l(transaction.posted_at, format: :date_only) %></div>

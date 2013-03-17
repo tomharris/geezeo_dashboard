@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'spec_helper'
 
 describe "dashboard/show" do
@@ -7,9 +9,9 @@ describe "dashboard/show" do
     @selected_account = assign(:selected_account, @accounts.first)
     assign(:page, 1)
 
-    transaction_collection = [valid_transaction, valid_transaction, valid_transaction]
-    transaction_collection.stub!(:total_pages).and_return(2)
-    assign(:transactions, transaction_collection)
+    @transaction_collection = [valid_transaction, valid_transaction, valid_transaction]
+    @transaction_collection.stub!(:total_pages).and_return(2)
+    assign(:transactions, @transaction_collection)
   end
 
   describe "account list" do
@@ -52,6 +54,18 @@ describe "dashboard/show" do
     it "should have pagination" do
       render
       response.should have_selector('.pagination ul li', count: 4) # 2 pages plus 'next' and 'previous'
+    end
+
+    it "should have an 'up arrow' for a credit transaction" do
+      @transaction_collection.first.stub!(:credit?).and_return(true)
+      render
+      response.should have_selector('.transaction-row .badge.badge-success', text: '↑')
+    end
+
+    it "should have a 'down arrow' for a debit transaction" do
+      @transaction_collection.first.stub!(:debit?).and_return(true)
+      render
+      response.should have_selector('.transaction-row .badge.badge-warning', text: '↓')
     end
   end
 end
