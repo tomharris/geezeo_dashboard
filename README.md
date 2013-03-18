@@ -3,7 +3,9 @@
 ## Installation
 
 `gem install rails`
+
 `gem install bundler`
+
 `bundle install`
 
 ## How it works
