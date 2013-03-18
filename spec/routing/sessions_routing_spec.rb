@@ -14,5 +14,9 @@ describe SessionsController do
     it "routes to #destroy" do
       delete("/sessions").should route_to("sessions#destroy")
     end
+
+    it "routes to #destroy" do
+      get("/sign_out").should route_to("sessions#destroy")
+    end
   end
 end

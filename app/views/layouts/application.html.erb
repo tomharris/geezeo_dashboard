@@ -9,6 +9,11 @@
 </head>
 <body>
   <div class="container-fluid">
+    <%- if signed_in? -%>
+    <div class="row-fluid sign-out-bar">
+      <div class="span1 offset11"><%= link_to 'Log Out', sign_out_path, class: 'btn btn-danger' %></div>
+    </div>
+    <%- end -%>
     <%= yield %>
   </div>
 </body>
