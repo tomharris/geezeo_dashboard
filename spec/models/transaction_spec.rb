@@ -64,4 +64,12 @@ describe Transaction do
       transaction.should be_debit
     end
   end
+
+  describe "#tag_names" do
+
+    it "should return the names of the tags given with this transaction" do
+      transaction = Transaction.new.tap { |a| a.tags = [{ 'tag' => { 'name' => "Personal", 'balance' => 61.01 } }] }
+      transaction.tag_names == ['Personal']
+    end
+  end
 end

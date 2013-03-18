@@ -67,5 +67,11 @@ describe "dashboard/show" do
       render
       response.should have_selector('.transaction-row .badge.badge-warning', text: '↓')
     end
+
+    it "should have a label for each tag" do
+      @transaction_collection.first.stub!(:tag_names).and_return(['Income'])
+      render
+      response.should have_selector('.transaction-row span.label.label-inverse', text: 'Income')
+    end
   end
 end

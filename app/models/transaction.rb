@@ -38,4 +38,10 @@ class Transaction
   def debit?
     transaction_type == 'Debit'
   end
+
+  def tag_names
+    tags.collect do |tag|
+      tag['tag']['name']
+    end
+  end
 end
