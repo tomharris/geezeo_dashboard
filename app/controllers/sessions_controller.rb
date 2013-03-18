@@ -10,7 +10,8 @@ class SessionsController < ApplicationController
 
       redirect_to dashboard_path
     else
-      redirect_to new_sessions_path
+      flash['warning'] = 'That UserID / API token combination is not valid!'
+      render 'new'
     end
   end
 

@@ -16,27 +16,45 @@ describe SessionsController do
       post :create, session: { user_id: '1', token: 'some_token' }
     end
 
-    it "should create the session by saving the user_id and token in the session if the credentials are valid" do
-      User.any_instance.stub(:valid?).and_return(true)
+    describe "with valid credentials" do
 
-      do_post
-      session[:user_id].should == '1'
-      session[:token].should == 'some_token'
+      before(:each) do
+        User.any_instance.stub(:valid?).and_return(true)
+      end
+
+      it "should create the session by saving the user_id and token in the session" do
+        do_post
+        session[:user_id].should == '1'
+        session[:token].should == 'some_token'
+      end
+
+      it "should redirect to the dashboard" do
+        do_post
+        response.should redirect_to(dashboard_path)
+      end
     end
 
-    it "should not save the user_id and token in the session if the credentials are invalid" do
-      User.any_instance.stub(:valid?).and_return(false)
+    describe "with invalid credentials" do
 
-      do_post
-      session[:user_id].should be_nil
-      session[:token].should be_nil
-    end
+      before(:each) do
+        User.any_instance.stub(:valid?).and_return(false)
+      end
 
-    it "should redirect to the dashboard" do
-      User.any_instance.stub(:valid?).and_return(true)
+      it "should not save the user_id and token in the session" do
+        do_post
+        session[:user_id].should be_nil
+        session[:token].should be_nil
+      end
 
-      do_post
-      response.should redirect_to(dashboard_path)
+      it "should rerender to the new template" do
+        do_post
+        response.should render_template('new')
+      end
+
+      it "should set a flash message" do
+        do_post
+        flash['warning'].should_not be_nil
+      end
     end
   end
 
