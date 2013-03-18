@@ -1,5 +1,31 @@
+<%- content_for :head do -%>
+<script src="https://www.google.com/jsapi"></script>
+<script>
+  google.load("visualization", "1", {packages:["corechart"]});
+
+  function drawChart(data) {
+    var chart = new google.visualization.LineChart(document.getElementById('transaction_chart'));
+    chart.draw(data, { title: 'Spending trends' });
+  }
+
+  $(function() {
+    var data = google.visualization.arrayToDataTable([
+      ['Date', 'Amount']
+      <%- @transactions.each do |transaction| -%>
+        <%- if transaction.debit? -%>
+        ,['<%= l(transaction.posted_at, format: :date_only) %>', <%= transaction.balance %>]
+        <%- end -%>
+      <%- end -%>
+    ]);
+    drawChart(data);
+  });
+</script>
+<%- end -%>
+
 <div id="transaction-section" class="span9">
   <h3>Transaction Details for <%= @selected_account.name %></h3>
+
+  <div id="transaction_chart" style="width: 600px; height: 300px;"></div>
 
   <div class="row-fluid transaction-header">
     <div class="span2 offset1"><b>Name</b></div>

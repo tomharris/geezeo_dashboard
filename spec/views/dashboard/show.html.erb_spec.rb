@@ -73,5 +73,10 @@ describe "dashboard/show" do
       render
       response.should have_selector('.transaction-row span.label.label-inverse', text: 'Income')
     end
+
+    it "should have a div for the spending chart" do
+      render
+      response.should have_selector('div#transaction_chart')
+    end
   end
 end

@@ -1,3 +1,12 @@
 $('.account').removeClass('active');
 $('#<%= @selected_account.id %>').addClass('active');
 $('#transaction-section').replaceWith('<%= escape_javascript(render('transaction_section')) %>');
+
+drawChart(google.visualization.arrayToDataTable([
+  ['Date', 'Balance']
+  <%- @transactions.each do |transaction| -%>
+    <%- if transaction.debit? -%>
+    ,['<%= l(transaction.posted_at, format: :date_only) %>', <%= transaction.balance %>]
+    <%- end -%>
+  <%- end -%>
+]));
