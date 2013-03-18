@@ -37,6 +37,12 @@ describe DashboardController do
       assigns(:accounts).should_not be_empty
     end
 
+    it "should assign the total of all account balances" do
+      do_get
+
+      assigns(:account_balance_total).should == 2_070.42 # total from the account fixtures
+    end
+
     it "should assign the current user's first account to selected_account by default if one isn't specified" do
       do_get
 

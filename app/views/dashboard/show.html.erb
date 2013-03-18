@@ -1,7 +1,7 @@
 <div class="row-fluid">
   <div class="span3 well">
     <ul class="nav nav-list">
-      <li class="nav-header">Accounts</li>
+      <li class="nav-header">Accounts (<%= number_to_currency(@account_balance_total) %>)</li>
 
       <%- @accounts.each do |account| -%>
       <li id="<%= account.id %>" class="account <%= 'active' if account.id == @selected_account.id %>">
